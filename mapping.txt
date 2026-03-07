@@ -1,0 +1,27 @@
+# compiler: R8
+# compiler_version: 8.2.47
+# min_api: 21
+# pg_map_id: 5f8a3b2c
+# common_typos_disable
+com.spotrr.app.BuildConfig -> com.spotrr.app.BuildConfig:
+    boolean DEBUG -> DEBUG
+    java.lang.String APPLICATION_ID -> APPLICATION_ID
+    java.lang.String BUILD_TYPE -> BUILD_TYPE
+    int VERSION_CODE -> VERSION_CODE
+    java.lang.String VERSION_NAME -> VERSION_NAME
+com.spotrr.app.MainActivity -> com.spotrr.app.MainActivity:
+    void <init>() -> <init>
+    void onCreate(android.os.Bundle) -> onCreate
+    java.lang.String getMainComponentName() -> getMainComponentName
+com.spotrr.app.MainApplication -> com.spotrr.app.MainApplication:
+    void <init>() -> <init>
+    void onCreate() -> onCreate
+    com.facebook.react.ReactNativeHost getReactNativeHost() -> getReactNativeHost
+com.facebook.react.ReactActivity -> com.facebook.react.ReactActivity:
+    void <init>() -> <init>
+    void onCreate(android.os.Bundle) -> onCreate
+    void onPause() -> onPause
+    void onResume() -> onResume
+    void onDestroy() -> onDestroy
+com.facebook.react.ReactApplication -> com.facebook.react.ReactApplication:
+    com.facebook.react.ReactNativeHost getReactNativeHost() -> getReactNativeHost
