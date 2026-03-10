@@ -1,0 +1,5 @@
+node_mdoules
+.env
+.expo
+dist
+build

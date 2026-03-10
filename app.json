@@ -10,8 +10,8 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.spotrr.app",
-      "buildNumber": "4",
+      "bundleIdentifier": "app.emergent.spotrr",
+      "buildNumber": "5",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Spotrr uses your location to find gym buddies near you",
         "ITSAppUsesNonExemptEncryption": false
@@ -60,7 +60,7 @@
         "expo-build-properties",
         {
           "android": {
-            "minSdkVersion": 21,
+            "minSdkVersion": 24,
             "targetSdkVersion": 35,
             "compileSdkVersion": 35,
             "buildToolsVersion": "35.0.0",
