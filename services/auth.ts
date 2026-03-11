@@ -33,7 +33,7 @@ export interface AuthResponse {
 
 export const authService = {
   async googleSignIn(idToken: string, email: string, name: string, dateOfBirth?: string): Promise<AuthResponse> {
-    const response = await api.post('/auth/signup/google', {
+    const response = await api.post('/google-auth', {
       id_token: idToken,
       email,
       name,

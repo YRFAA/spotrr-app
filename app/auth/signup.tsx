@@ -112,7 +112,7 @@ export default function SignUpScreen() {
 
     setLoading(true);
     try {
-      const response = await api.post('/auth/signup/email', {
+      const response = await api.post('/signup', {
         email,
         password,
         name,
