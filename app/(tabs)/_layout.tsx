@@ -4,8 +4,6 @@ import { Tabs } from "expo-router";
 import React from "react";
 import { Platform, StyleSheet, View, useColorScheme } from "react-native";
 
-import Colors from "@/constants/colors";
-
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
@@ -15,32 +13,23 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors.light.tint,
-        tabBarInactiveTintColor: isDark ? Colors.dark.tabIconDefault : Colors.light.tabIconDefault,
+        tabBarActiveTintColor: "#E53935",
+        tabBarInactiveTintColor: "#555",
         headerShown: false,
         tabBarStyle: {
           position: "absolute",
-          backgroundColor: isIOS ? "transparent" : isDark ? "#0c0c0c" : "#fff",
-          borderTopWidth: isWeb ? 1 : 0,
-          borderTopColor: isDark ? "#333" : "#e0e0e0",
+          backgroundColor: isIOS ? "transparent" : "#0c0c0c",
+          borderTopWidth: 1,
+          borderTopColor: "#1a1a1a",
           elevation: 0,
           ...(isWeb ? { height: 84 } : {}),
         },
         tabBarBackground: () =>
           isIOS ? (
-            <BlurView
-              intensity={100}
-              tint={isDark ? "dark" : "light"}
-              style={StyleSheet.absoluteFill}
-            />
-          ) : isWeb ? (
-            <View
-              style={[
-                StyleSheet.absoluteFill,
-                { backgroundColor: isDark ? "#0c0c0c" : "#fff" },
-              ]}
-            />
-          ) : null,
+            <BlurView intensity={100} tint="dark" style={StyleSheet.absoluteFill} />
+          ) : (
+            <View style={[StyleSheet.absoluteFill, { backgroundColor: "#0c0c0c" }]} />
+          ),
       }}
     >
       <Tabs.Screen

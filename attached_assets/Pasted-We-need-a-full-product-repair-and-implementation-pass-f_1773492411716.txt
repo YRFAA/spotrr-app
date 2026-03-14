@@ -1,0 +1,382 @@
+We need a full product repair and implementation pass for the Spotrr mobile app.
+
+This is NOT a small UI cleanup.
+This is a full functionality fix.
+
+The current TestFlight version has multiple broken or incomplete features:
+- profile settings do not work
+- preferences do not work
+- notifications do not work
+- privacy does not work
+- edit profile does not work
+- no proper logout flow
+- no delete account option
+- no deactivate account option
+- goals/tags shown on profile are not editable
+- matches screen is using mock data
+- discover screen is using mock profiles
+- filter/settings button does not work
+- there is no real swipe interaction like Tinder
+- there is no vertical scrolling experience like TikTok / slot machine style discovery
+- no premium subscription feature exists yet
+- users cannot properly like, match, and chat in a real backend-connected flow
+
+The app must be converted into a fully functional production-ready mobile app.
+
+==================================================
+CORE PRODUCT BEHAVIOR
+==================================================
+
+Spotrr is a gym partner matching app.
+
+Users should be able to:
+1. create an account
+2. create and edit a real profile
+3. upload/update their own details
+4. choose gym location
+5. choose workout focus / muscle groups
+6. choose goals
+7. set availability
+8. browse real profiles from the database
+9. scroll vertically through profiles like TikTok / a slot machine
+10. swipe left/right like Tinder
+11. tap heart to like a user
+12. match only when both users like each other
+13. start chatting only after a mutual match
+14. manage account settings properly
+15. subscribe to premium plans
+
+Absolutely remove placeholder logic, dead buttons, and mock-only data from the live app experience.
+
+==================================================
+VERY IMPORTANT UX CHANGES
+==================================================
+
+The discover experience must work like this:
+
+1. Vertical profile browsing:
+- user can scroll up/down through profiles like TikTok or a slot machine
+- each profile should snap cleanly into place
+- smooth, addictive, fast interaction
+- one profile card should feel like the main focus at a time
+
+2. Match controls:
+- swipe left = pass
+- swipe right = like
+- heart button = like
+- X button = pass
+- if both users like each other, create a match record
+- once matched, unlock chat between those two users
+
+3. Do not use mock profiles in production:
+- load real profiles from backend/database
+- if no profiles exist, show a proper empty state
+- do not hardcode Alex / Jordan / Sam / mock messages in production
+
+==================================================
+SCREEN-BY-SCREEN FIXES
+==================================================
+
+A. DISCOVER SCREEN
+Fix all of this:
+- make the filter/settings icon work
+- fetch real profiles from backend
+- exclude current logged-in user from results
+- filter by gym, goals, workout focus, availability, and distance
+- support vertical feed browsing
+- support swipe gestures left/right
+- support heart button like
+- support pass button
+- persist likes/matches to database
+- do not show expired/mock/demo cards in production
+
+B. MATCHES SCREEN
+Fix all of this:
+- replace mock match list with real matches from backend
+- show only mutual matches
+- each match should open a real chat thread
+- unread indicator should be real
+- timestamps should be real
+- latest message preview should be real
+- if no matches exist, show proper empty state
+
+C. PROFILE SCREEN
+Fix all of this:
+- Edit Profile must open a real editable form
+- Preferences must open working settings
+- Notifications must open real notification preferences
+- Privacy must open real privacy controls
+- Sign Out must work
+- add Delete Account option
+- add Deactivate Account option
+- goals shown in “My Goals” must be editable and saved to backend
+- gym details, bio, training frequency, age, preferences, and images must be editable
+- stats shown on the profile must come from real stored data where applicable, not mock values
+
+==================================================
+PROFILE EDITING REQUIREMENTS
+==================================================
+
+Build a full editable profile flow.
+
+Users must be able to update:
+- name
+- age or DOB
+- bio
+- gym
+- location
+- distance radius
+- workout frequency
+- muscle groups
+- goals
+- availability
+- training times
+- profile photos
+- premium status visibility features if relevant
+
+Changes must save to backend and persist after app restart.
+
+If profile fields are missing from the schema, add them properly.
+
+==================================================
+ACCOUNT SETTINGS REQUIREMENTS
+==================================================
+
+Add a proper account/settings system.
+
+Must include:
+1. Edit Profile
+2. Preferences
+3. Notifications
+4. Privacy
+5. Sign Out
+6. Deactivate Account
+7. Delete Account
+
+Required behavior:
+- Sign Out clears local auth/session and returns user to login/signup
+- Deactivate Account hides profile from discovery but keeps account recoverable
+- Delete Account removes or anonymizes account properly according to backend rules
+- Privacy settings should control things like profile visibility, discoverability, distance visibility, and message permissions
+- Notification settings should control pushes for likes, matches, messages, and reminders
+
+==================================================
+MATCHING LOGIC
+==================================================
+
+Implement real matching logic.
+
+Required:
+- left swipe or X = pass
+- right swipe or heart = like
+- store swipes/likes in backend
+- if user A likes user B and user B likes user A, create a match
+- create chat thread automatically on match
+- show match in matches screen
+- allow messaging only for matched users
+
+Also ensure:
+- no duplicate matches
+- no self-matching
+- no repeat profile spam once passed unless intentionally configured
+- matched users should not remain in normal discover flow unless designed intentionally
+
+==================================================
+CHAT SYSTEM
+==================================================
+
+Implement working chat for matched users only.
+
+Requirements:
+- open chat from matches screen
+- real-time or near-real-time messaging
+- store messages in backend
+- show latest message preview in matches list
+- show timestamps
+- unread count or unread indicator
+- block unauthorized users from messaging unless matched
+
+==================================================
+PREMIUM SUBSCRIPTION FEATURE
+==================================================
+
+Add premium subscriptions to Spotrr.
+
+Base plan:
+- Premium Monthly = $2.99 per month
+
+Also structure the app so more subscription options can be added later, such as:
+- monthly premium
+- quarterly premium
+- annual premium
+
+Premium should have a real upgrade flow in the app.
+
+Implement:
+1. Premium upsell screen
+2. Subscription selection screen
+3. Payment/subscription integration suitable for iOS
+4. Subscription status stored in backend
+5. Restore purchases flow
+6. Proper gating of premium features
+
+Suggested premium features:
+- unlimited likes
+- advanced gym / distance filters
+- see who liked you
+- boost profile visibility
+- rewind last pass
+- priority placement in discovery
+- advanced matching filters
+- premium badge
+
+Important:
+- implement subscription architecture cleanly so Apple-compliant in-app subscriptions can be used
+- monthly plan must be set to $2.99
+- make it easy to add more plans later
+- premium state must persist and be checked from backend / entitlement layer
+
+==================================================
+BACKEND / DATABASE REQUIREMENTS
+==================================================
+
+Audit and fix the backend/database so all of this works with real data.
+
+Confirm or create proper tables/collections for at least:
+- users
+- profiles
+- swipes or likes
+- matches
+- chats or conversations
+- messages
+- subscriptions
+- notification_preferences
+- privacy_settings
+
+Ensure:
+- all schema relationships are correct
+- no mock-only hardcoded data paths remain
+- authenticated user can read/write only what they should
+- profile updates persist correctly
+- matches and chats persist correctly
+- premium entitlements persist correctly
+
+==================================================
+REMOVE MOCK / PLACEHOLDER LOGIC
+==================================================
+
+Search the entire codebase for:
+- mock profiles
+- hardcoded matches
+- placeholder settings actions
+- disabled buttons
+- fake counters
+- demo messages
+- static goals/tags
+- no-op handlers
+
+Replace them with real production behavior.
+
+If some temporary sample data is needed for development, isolate it and make sure it does not appear in production/TestFlight builds.
+
+==================================================
+AUTH / SESSION REQUIREMENTS
+==================================================
+
+Make auth/account behavior complete and proper.
+
+Required:
+- logged-in user session persists correctly
+- user can sign out properly
+- user can deactivate account
+- user can delete account
+- app routes correctly after logout/login
+- protected screens require auth
+- no stuck logged-in state with no exit option
+
+==================================================
+ERROR HANDLING
+==================================================
+
+Replace vague silent failures with real user-facing messages and logs.
+
+Examples:
+- profile save failed
+- subscription failed
+- match creation failed
+- chat failed to load
+- logout failed
+
+Add proper logs and useful alerts/toasts where needed.
+
+==================================================
+UI / UX QUALITY REQUIREMENTS
+==================================================
+
+Keep the existing Spotrr dark premium look, but make it fully functional.
+
+Requirements:
+- smooth gestures
+- fast transitions
+- polished feed
+- responsive buttons
+- no dead taps
+- every visible action must do something real
+- premium flow should feel native and trustworthy
+- editable profile should feel like a real app, not a placeholder form
+
+==================================================
+TESTING REQUIREMENTS
+==================================================
+
+Before finishing, test all of the following:
+
+1. user can sign up
+2. user can log in
+3. user can edit profile
+4. user can update goals
+5. user can update preferences
+6. user can change privacy settings
+7. user can change notification settings
+8. user can sign out
+9. user can deactivate account
+10. user can delete account
+11. discover loads real profiles
+12. vertical scrolling through profiles works
+13. swipe left/right works
+14. heart button works
+15. mutual like creates match
+16. match appears in matches screen
+17. chat opens and sends messages
+18. premium screen works
+19. $2.99/month subscription option appears
+20. subscription state persists correctly
+
+==================================================
+IMPORTANT PRODUCT RULE
+==================================================
+
+If a user can see it, tap it, select it, scroll it, swipe it, edit it, or open it, it must perform a real action and persist correctly.
+
+No fake buttons.
+No dead screens.
+No mock-only production data.
+No unfinished account flows.
+
+==================================================
+FINAL OUTPUT REQUIRED
+==================================================
+
+When done, provide a concise summary with:
+1. What was broken
+2. What was fixed
+3. What backend/data structures were added or repaired
+4. What premium subscription flow was added
+5. What screens were updated
+6. What was removed from mock/demo behavior
+7. What still needs Apple/App Store configuration if applicable
+
+Important:
+Do the actual implementation, not only a plan.
+Apply the fixes directly in the codebase.
+Make the app production-ready.
